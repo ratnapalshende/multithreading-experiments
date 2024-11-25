@@ -2,6 +2,8 @@
 Python community is celebrating a long-awaited milestone — the removal of the Global Interpreter Lock (GIL)! </br>
 From lots of years GIL has been bottleneck for CPU bound multithreaded programs. Now python introduced version [3.13](https://docs.python.org/3.13/whatsnew/3.13.html#free-threaded-cpython) and the wait is over, we can use this experimental feature to see the performance of python with GIL removed on multithreaded programs.
 
+<img src="https://github.com/ratnapalshende/multithreading-experiments/blob/main/static/rabbit_race.png" alt="rabbit_tortoise_race" width="500"/>
+
 ## But what the heck is GIL ?
 <b>Process : </b>Program is in execution state known as process.<br>
 <b>Thread : </b>Thread is single unit of execution.<br>
@@ -73,6 +75,8 @@ Here’s a comparison based on benchmarks:
 |-------------------------|---------------------------|-------------------------------|
 | Single-threaded         | ~3.26 seconds            | ~2.97 seconds                |
 | Multi-threaded | ~3.28 seconds            | ~1.04 seconds                |
+
+![results](https://github.com/ratnapalshende/multithreading-experiments/blob/main/static/results.png)
 
 ## Resources 
 - [Installing GIL free python](https://py-free-threading.github.io/installing_cpython/)
