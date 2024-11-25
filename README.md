@@ -11,12 +11,13 @@ From lots of years GIL has been bottleneck for CPU bound multithreaded programs.
 - Two or more processes cannot share the same memory directly.
 - Two or more threads can access the same memory directly.
 
-GIL which stands for Global Interpreter Lock, in simple words it is a mutex lock that allows only one thread at a time to execute.<br>
-But it is more than just a mutex lock.<br>
-Example: if a thread wants to execute then it will set mutex lock, now once it is set no other thread can execute without mutex lock. so another threads will be in waitng state to get the mutex lock so that they can execute.
+The GIL (Global Interpreter Lock) is a mutex lock that allows only one thread to execute at a time.
+However, it is more than just a mutex lock.
+
+For example, if a thread wants to execute, it sets a mutex lock. Once set, no other thread can execute without acquiring the mutex lock. Other threads must wait for the lock to be released to proceed with execution.
 
 ## What is the problem with GIL ?
-Generally, If your CPU have multiple cores then you can run multiple threads parallely. but GIL doesn't allow that because to make python easy to understand and write code python uses refference counting for memory management.<br>
+Generally, if your CPU has multiple cores, you can run multiple threads in parallel. <br>However, the GIL prevents this. To make Python easier to understand and manage, Python uses reference counting for memory management.<br>
 python keeps track of all refferences pointing to a object in a variable. whenever the refference count is 0 for a particular object then python removes that object from the memory, that's how python manages memory.
 </br>Example:
 ```python
@@ -24,8 +25,10 @@ a = "hello"
 b = a
 ```
 Here you can see the refference count for String object `"hello"` is 2 pointing by `a` and `b`.<br>
-Now assume GIL allowed to run multiple threads at the same time then race conditions will happen because more than one thread will be accessing and modifying memory at the same time which can lead to unexpected behaviour and even program will crash and something bad can happen, to avoid this GIL exist in python.
+
+If the GIL allowed multiple threads to run simultaneously, race conditions could occur, with multiple threads accessing and modifying memory at the same time. This could lead to unexpected behavior, crashes, and other issues. To avoid this, the GIL exists in Python.
 <br>
+
 Python is their from long time when operating system doesn't even know about threads that's why GIL is included in python, but now in this modern world with multi core cpus where we can run one thread on one cpu core achieving parallelism and to do that we need a way to make python faster for multithreaded programs.<br>
 So to make python future proof and more resilient community is working on to remove GIL, for now in 3.13 they introduced experimental feature where devopers can test it in their enviornment.
 
